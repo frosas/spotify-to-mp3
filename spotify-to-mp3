@@ -20,8 +20,9 @@ class SpotifyToMp3
   private
 
   def download_url(url, path)
+    content = open(url).read
     file = open(path, 'wb')
-    file.write(open(url).read)
+    file.write(content)
     file.close
     path
   end
