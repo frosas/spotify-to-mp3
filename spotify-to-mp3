@@ -17,6 +17,10 @@ class SpotifyToMp3
     log("Getting song info for #{spotify_uri} from Spotify")
     spotify_song = @spotify.get_song_from_uri(spotify_uri)
     filename = "#{spotify_song.artists.first.name} - #{spotify_song.name}.mp3"
+    if (File.exists?(filename))
+        log("File #{filename} already exists, skipping")
+        return
+    end
     log("Getting download URL for \"#{spotify_song.artists.first.name} - #{spotify_song.name}\" from Grooveshark")
     url = @grooveshark.song_url(spotify_song.artists.first.name, spotify_song.name)
     log("Downloading song")
