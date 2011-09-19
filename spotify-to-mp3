@@ -4,27 +4,37 @@ require 'rubygems'
 require 'grooveshark'
 require 'meta-spotify'
 require 'open-uri'
+require 'colorize'
 
 class SpotifyToMp3
-  def initialize
+  def initialize(log)
     @grooveshark = Grooveshark.new
     @spotify = Spotify.new
+    @log = log
   end
 
   def download_spotify_song(spotify_uri)
+    log("Getting song info for #{spotify_uri} from Spotify")
     spotify_song = @spotify.get_song_from_uri(spotify_uri)
+    filename = "#{spotify_song.artists.first.name} - #{spotify_song.name}.mp3"
+    log("Getting download URL for \"#{spotify_song.artists.first.name} - #{spotify_song.name}\" from Grooveshark")
     url = @grooveshark.song_url(spotify_song.artists.first.name, spotify_song.name)
-    download_url(url, "#{spotify_song.artists.first.name} - #{spotify_song.name}.mp3")
+    log("Downloading song")
+    download_url(url, filename)
+    log("Song downloaded to #{filename}")
   end
 
   private
+
+  def log(message)
+    @log.call(message)
+  end
 
   def download_url(url, path)
     content = open(url).read
     file = open(path, 'wb')
     file.write(content)
     file.close
-    path
   end
 
   class Grooveshark
@@ -34,7 +44,6 @@ class SpotifyToMp3
 
     def song_url(artist, title)
       songs = @client.search_songs("#{artist} #{title}")
-      # TODO Get better match
       song = songs.first # Fallback
       raise "Song not found" if song.nil?
       @client.get_song_url(song)
@@ -48,14 +57,13 @@ class SpotifyToMp3
   end
 end
 
-spotifyToMp3 = SpotifyToMp3.new
+spotifyToMp3 = SpotifyToMp3.new(lambda { |message| puts message })
 
 ARGF.each do |spotify_uri|
   spotify_uri.strip!
-  print "Downloading #{spotify_uri}"
   begin
-    puts " -> #{spotifyToMp3.download_spotify_song(spotify_uri)}"
+    spotifyToMp3.download_spotify_song(spotify_uri)
   rescue
-    puts " ERROR: #{$!}"
+    puts "ERROR: #{$!}".red
   end
 end
