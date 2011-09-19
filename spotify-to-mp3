@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'grooveshark'
+require 'meta-spotify'
+require 'open-uri'
+
+class SpotifyToMp3
+  def initialize
+    @grooveshark = Grooveshark.new
+    @spotify = Spotify.new
+  end
+
+  def download_spotify_song(spotify_uri)
+    spotify_song = @spotify.get_song_from_uri(spotify_uri)
+    url = @grooveshark.song_url(spotify_song.artists.first.name, spotify_song.name)
+    download_url(url, "#{spotify_song.artists.first.name} - #{spotify_song.name}.mp3")
+  end
+
+  private
+
+  def download_url(url, path)
+    file = open(path, 'wb')
+    file.write(open(url).read)
+    file.close
+    path
+  end
+
+  class Grooveshark
+    def initialize
+      @client = ::Grooveshark::Client.new
+    end
+
+    def song_url(artist, title)
+      songs = @client.search_songs("#{artist} #{title}")
+      # TODO Get better match
+      song = songs.first # Fallback
+      raise "Song not found" if song.nil?
+      @client.get_song_url(song)
+    end
+  end
+
+  class Spotify
+    def get_song_from_uri(uri)
+      MetaSpotify::Track.lookup(uri)
+    end
+  end
+end
+
+spotifyToMp3 = SpotifyToMp3.new
+
+ARGF.each do |spotify_uri|
+  spotify_uri.strip!
+  print "Downloading #{spotify_uri}"
+  begin
+    puts " -> #{spotifyToMp3.download_spotify_song(spotify_uri)}"
+  rescue
+    puts " ERROR: #{$!}"
+  end
+end
