@@ -47,8 +47,7 @@ class SpotifyToMp3
     end
 
     def song_url(artist, title)
-      songs = @client.search_songs("#{artist} #{title}")
-      song = songs.first # Fallback
+      song = @client.search_songs("#{artist} #{title}").first
       raise "Song not found" if song.nil?
       @client.get_song_url(song)
     end
