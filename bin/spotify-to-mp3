@@ -76,17 +76,21 @@ class SpotifyToMp3
   end
 end
 
-spotifyToMp3 = SpotifyToMp3.new(lambda { |message| puts message })
-
-file = ARGV.first
-raise "No songs file specified. Usage: #{$0} file" if file.nil?
-
-File.open(file).each_line{|spotify_uri|
-  spotify_uri.strip!
-  next if spotify_uri.empty?
-  begin
-    spotifyToMp3.download_song(spotify_uri)
-  rescue
-    puts "ERROR: #{$!}".red
-  end
-}
+begin
+  spotifyToMp3 = SpotifyToMp3.new(lambda { |message| puts message })
+  
+  file = ARGV.first
+  raise "No songs file specified. Usage: #{$0} file" if file.nil?
+  
+  File.open(file).each_line{|spotify_uri|
+    spotify_uri.strip!
+    next if spotify_uri.empty?
+    begin
+      spotifyToMp3.download_song(spotify_uri)
+    rescue
+      puts "ERROR: #{$!}".red
+    end
+  }
+rescue
+  puts "ERROR: #{$!}".red
+end
