@@ -1,0 +1,28 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    colorize (0.5.8)
+    crack (0.3.0)
+    grooveshark (0.2.2)
+      json (>= 1.4.6)
+      rest-client (>= 1.5.1)
+    httparty (0.8.0)
+      multi_json
+      multi_xml
+    json (1.6.1)
+    meta-spotify (0.1.5)
+      crack (>= 0.1.4)
+      httparty (>= 0.4.5)
+    mime-types (1.16)
+    multi_json (1.0.3)
+    multi_xml (0.4.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  colorize
+  grooveshark
+  meta-spotify
