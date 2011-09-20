@@ -15,7 +15,7 @@ Make sure you have rubygems installed and configured:
     $ sudo apt-get install rubygems1.8
     $ echo 'PATH=$PATH:/var/lib/gems/1.8/bin' | sudo tee /etc/profile.d/rubygems1.8.sh >/dev/null
 
-<span><!-- Any better way to split two <pre>s? --></span>
+<span></span>
 
     $ sudo gem install spotify-to-mp3
 
