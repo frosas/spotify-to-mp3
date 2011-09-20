@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files`.split("\n")
   s.executables = `git ls-files -- bin/*`.split("\n").map{|f| File.basename(f)}
+  s.require_paths = ['.']
 end
