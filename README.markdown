@@ -4,7 +4,24 @@ A simple command line utility to download MP3 files of Spotify tracks
 
 ## Installation
 
+### Mac OS X (Lion)
+
     $ gem install spotify-to-mp3
+
+### Linux (Ubuntu 11.04)
+
+Make sure you have rubygems installed and configured:
+
+    $ sudo apt-get install rubygems1.8
+    $ echo 'PATH=$PATH:/var/lib/gems/1.8/bin' | sudo tee /etc/profile.d/rubygems1.8.sh >/dev/null
+
+    $ sudo gem install spotify-to-mp3
+
+### Windows (not tested)
+
+[Install Ruby](http://rubyinstaller.org/)
+
+    > gem install spotify-to-mp3
 
 ## Usage
 
