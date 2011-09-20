@@ -16,7 +16,7 @@ class SpotifyToMp3
   def download_song(spotify_uri)
     log("Getting song info for #{spotify_uri} from Spotify")
     track = @spotify.track(spotify_uri)
-    filename = "#{track.artist()} - #{track.name()}.mp3"
+    filename = File.basename("#{track.artist()} - #{track.name()}.mp3".tr('/', '-'))
     if (File.exists?(filename))
         log("File #{filename} already exists, skipping")
         return
