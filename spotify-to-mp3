@@ -18,8 +18,8 @@ class SpotifyToMp3
     track = @spotify.track(spotify_uri)
     filename = File.basename("#{track.artist()} - #{track.name()}.mp3".tr('/', '-'))
     if (File.exists?(filename))
-        log("File #{filename} already exists, skipping")
-        return
+      log("File #{filename} already exists, skipping")
+      return
     end
     log("Getting download URL for \"#{track.artist()} - #{track.name()}\" from Grooveshark")
     url = @grooveshark.song_url(track.artist(), track.name())
