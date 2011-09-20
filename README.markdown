@@ -4,8 +4,7 @@ A simple command line utility to download MP3 files of Spotify tracks
 
 ## Installation
 
-    $ gem install bundle
-    $ bundle install
+    $ gem install spotify-to-mp3
 
 ## Usage
 
