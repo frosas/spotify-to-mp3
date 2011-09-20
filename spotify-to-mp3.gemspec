@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name = 'spotify-to-mp3'
   s.summary = 'Spotify to MP3'
   s.description = 'Download MP3 files of Spotify tracks'
-  s.version = '0.3'
+  s.version = '0.3.1'
   s.author = 'Francesc Rosàs'
   s.email = 'francescrosasbosque@gmail.com'
   s.homepage = 'https://github.com/frosas/spotify-to-mp3'
