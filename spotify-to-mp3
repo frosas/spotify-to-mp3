@@ -2,9 +2,9 @@
 
 require 'rubygems'
 require 'grooveshark'
-require 'meta-spotify'
 require 'open-uri'
 require 'colorize'
+require 'cgi'
 
 class SpotifyToMp3
   def initialize(log)
@@ -13,16 +13,16 @@ class SpotifyToMp3
     @log = log
   end
 
-  def download_spotify_song(spotify_uri)
+  def download_song(spotify_uri)
     log("Getting song info for #{spotify_uri} from Spotify")
-    spotify_song = @spotify.get_song_from_uri(spotify_uri)
-    filename = "#{spotify_song.artists.first.name} - #{spotify_song.name}.mp3"
+    track = @spotify.track(spotify_uri)
+    filename = "#{track.artist()} - #{track.name()}.mp3"
     if (File.exists?(filename))
         log("File #{filename} already exists, skipping")
         return
     end
-    log("Getting download URL for \"#{spotify_song.artists.first.name} - #{spotify_song.name}\" from Grooveshark")
-    url = @grooveshark.song_url(spotify_song.artists.first.name, spotify_song.name)
+    log("Getting download URL for \"#{track.artist()} - #{track.name()}\" from Grooveshark")
+    url = @grooveshark.song_url(track.artist(), track.name())
     log("Downloading song")
     download_url(url, filename)
     log("Song downloaded to #{filename}")
@@ -55,8 +55,24 @@ class SpotifyToMp3
   end
 
   class Spotify
-    def get_song_from_uri(uri)
-      MetaSpotify::Track.lookup(uri)
+    def track(uri)
+      content = open('http://ws.spotify.com/lookup/1/.json?uri=' + CGI.escape(uri))
+      json = JSON.parse(content.string)
+      Track.new(json)
+    end
+
+    class Track
+      def initialize(json)
+        @json = json
+      end
+
+      def name
+        @json['track']['name']
+      end
+
+      def artist
+        @json['track']['artists'].first['name']
+      end
     end
   end
 end
@@ -66,7 +82,7 @@ spotifyToMp3 = SpotifyToMp3.new(lambda { |message| puts message })
 ARGF.each do |spotify_uri|
   spotify_uri.strip!
   begin
-    spotifyToMp3.download_spotify_song(spotify_uri)
+    spotifyToMp3.download_song(spotify_uri)
   rescue
     puts "ERROR: #{$!}".red
   end

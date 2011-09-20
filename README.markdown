@@ -12,4 +12,3 @@ A simple command line utility to download MP3 files of Spotify tracks
 - Estimated download time
   - Per song
   - Total
-- Accept Spotify HTTP URIs
