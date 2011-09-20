@@ -17,7 +17,7 @@ A simple command line utility to download MP3 files of Spotify tracks
 
 2. Download songs. Errors will appear in red (eg, when a song is not found)
 
-        $ spotify-to-mp3 < songs.txt
+        $ spotify-to-mp3 songs.txt
 
 ## TODO
 
