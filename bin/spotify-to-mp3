@@ -7,38 +7,55 @@ require 'colorize'
 require 'cgi'
 
 class SpotifyToMp3
-  def initialize(log)
+  def initialize
     @grooveshark = Grooveshark.new
     @spotify = Spotify.new
-    @log = log
   end
 
-  def download_song(spotify_uri)
-    log("Getting song info for #{spotify_uri} from Spotify")
-    track = @spotify.track(spotify_uri)
-    filename = File.basename("#{track.artist()} - #{track.name()}.mp3".tr('/', '-'))
-    if (File.exists?(filename))
-      log("File #{filename} already exists, skipping")
-      return
-    end
-    log("Getting download URL for \"#{track.artist()} - #{track.name()}\" from Grooveshark")
-    url = @grooveshark.song_url(track.artist(), track.name())
-    log("Downloading song")
-    download_url(url, filename)
-    log("Song downloaded to #{filename}")
+  def create_song(id)
+    Song.new(id, @spotify, @grooveshark)
   end
 
   private
 
-  def log(message)
-    @log.call(message)
-  end
+  class Song
+    def initialize(id, spotify, grooveshark)
+      @spotify = spotify
+      @grooveshark = grooveshark
+      if id.start_with?('http://open.spotify.com/track/', 'spotify:track:')
+        track = spotify.track(id)
+        @grooveshark_query = "artist:\"#{track.artist}\" title:\"#{track.name}\""
+        @human_name = "#{track.artist} - #{track.name}"
+        @filename = "#{@human_name}.mp3"
+      else
+        @grooveshark_query = id
+        @human_name = id
+        @filename = "#{@human_name}.mp3"
+      end
+      @filename = File.basename(@filename) # Avoid injection attacks
+      @filename.tr('/', '-') # / is not allowed in file names
+    end
 
-  def download_url(url, path)
-    content = open(url).read
-    file = open(path, 'wb')
-    file.write(content)
-    file.close
+    def to_s
+      @human_name
+    end
+
+    def downloaded
+      File.exists?(@filename)
+    end
+
+    def download
+      download_url(@grooveshark.song_url(@grooveshark_query))
+    end
+
+    private
+
+    def download_url(url)
+      content = open(url).read
+      file = open(@filename, 'wb')
+      file.write(content)
+      file.close
+    end
   end
 
   class Grooveshark
@@ -46,8 +63,8 @@ class SpotifyToMp3
       @client = ::Grooveshark::Client.new
     end
 
-    def song_url(artist, title)
-      song = @client.search_songs("artist:\"#{artist}\" title:\"#{title}\"").first
+    def song_url(query)
+      song = @client.search_songs(query).first
       raise "Song not found" if song.nil?
       @client.get_song_url(song)
     end
@@ -61,36 +78,38 @@ class SpotifyToMp3
     end
 
     class Track
+      attr_reader :name, :artist
+
       def initialize(json)
-        @json = json
-      end
-
-      def name
-        @json['track']['name']
-      end
-
-      def artist
-        @json['track']['artists'].first['name']
+        @name = json['track']['name']
+        @artist = json['track']['artists'].first['name']
       end
     end
   end
 end
 
 begin
-  spotifyToMp3 = SpotifyToMp3.new(lambda { |message| puts message })
+  spotifyToMp3 = SpotifyToMp3.new
   
   file = ARGV.first
   raise "No songs file specified. Usage: #{$0} file" if file.nil?
   
-  File.open(file).each_line{|spotify_uri|
-    spotify_uri.strip!
-    next if spotify_uri.empty?
+  File.open(file).each_line{|song_id|
+    song_id.strip!
+    next if song_id.empty?
     begin
-      spotifyToMp3.download_song(spotify_uri)
+      song = spotifyToMp3.create_song(song_id)
+      print "Downloading #{song} "
+      if song.downloaded
+        puts "Already exists, skipping".green
+      else
+        song.download
+        puts "Done".green
+      end
     rescue
-      puts "ERROR: #{$!}".red
+      puts "#{$!}".red
     end
   }
 rescue
-  puts "ERROR: #{$!}".red
+  puts "#{$!}".red
 end

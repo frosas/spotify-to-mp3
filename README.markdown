@@ -38,6 +38,12 @@ Make sure you have rubygems installed and configured:
 
         $ spotify-to-mp3 songs.txt
 
+## Changelog
+
+Sep/26/2011
+
+- Both Spotify URLs and song names are accepted
+
 ## TODO
 
 - Consider multiple artists songs
