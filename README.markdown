@@ -45,3 +45,7 @@ Make sure you have rubygems installed and configured:
 - Estimated download time
   - Per song
   - Total
+- Some songs don't seem to be the good ones
+- Download songs using a query
+- Touch existing files so they can be distingued from non downloaded
+- Use artist and title from downloaded song on filename
