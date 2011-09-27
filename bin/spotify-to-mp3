@@ -57,7 +57,7 @@ class App
         track = @context[:spotify].track(@id)
         source = SpotifySource.new(@context, track)
       else
-        source = HumanSource.new(@context, @id)
+        source = PlainSource.new(@context, @id)
       end
       ResolvedSong.new(@context, source)
     end
@@ -92,18 +92,19 @@ class App
     end
   end
 
-  class HumanSource < Source
+  class PlainSource < Source
+    attr_reader :grooveshark_query, :to_s
+
     def initialize(context, id)
-      @context = context
-      @id = id
-    end
-
-    def grooveshark_query
-      @id
-    end
-
-    def to_s
-      @id
+      parts = id.split(' - ', 2)
+      if parts.length < 2
+        @grooveshark_query = id
+        @to_s = id
+      else
+        artist, name = parts
+        @grooveshark_query = "artist:\"#{artist}\" title:\"#{name}\""
+        @to_s = "#{artist} - #{name}"
+      end
     end
   end
 
