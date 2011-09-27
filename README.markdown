@@ -27,12 +27,12 @@ Make sure you have rubygems installed and configured:
 
 ## Usage
 
-1. Drag Spotify songs to a file (eg, songs.txt). It will look like this:
+1. Drag Spotify songs to a file (eg, songs.txt). Plain song names are also 
+   accepted. It may look like this:
 
         http://open.spotify.com/track/1JqTcOjOn7gEpeC0JcRVPa
-        http://open.spotify.com/track/4pQIl2gJyRDKiwIhEOc1gW
-        http://open.spotify.com/track/2rREB1sRvcb5i6AZRhOhey
-        http://open.spotify.com/track/6UOvd5f3oyfIGW3GA8dn89
+        spotify:track:1fE3ddAlmjJ99IIfLgZjTy
+        The Drums - Money
 
 2. Download songs. Errors will appear in red (eg, when a song is not found)
 
@@ -40,9 +40,9 @@ Make sure you have rubygems installed and configured:
 
 ## Changelog
 
-Sep/26/2011
+2011-09-26
 
-- Both Spotify URLs and song names are accepted
+- Both Spotify URLs and plain song names are accepted
 
 ## TODO
 
