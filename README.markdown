@@ -50,6 +50,7 @@ Make sure you have rubygems installed and configured:
 - Estimated download time
   - Per song
   - Total
-- Touch existing files so they can be distingued from non downloaded
 - Distinguish internal errors from user errors
 - Filter Grooveshark results by artist, title and length
+- Split code in multiple files
+- --sync option to add/remove \*.mp3 files to match songs file
