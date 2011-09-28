@@ -144,9 +144,8 @@ class App
     private
 
     def filename
-      name = "#{@raw_grooveshark_song.artist} - #{@raw_grooveshark_song.name}.mp3"
-      name.tr('/', '-') # / is not allowed in file names
-      name
+      "#{@raw_grooveshark_song.artist} - #{@raw_grooveshark_song.name}.mp3"
+        .tr('/', '-') # / is not allowed in file names
     end
 
     def download_url(url)
