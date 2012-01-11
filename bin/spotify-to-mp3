@@ -29,7 +29,8 @@ class App
           print "-> Searching \"#{song}\" on Grooveshark "
           song = song.from_grooveshark
           print "-> Downloading \"#{song}\" "
-          if song.downloaded
+          if File.exists? song.filename
+            FileUtils.touch song.filename # To know about songs no longer in download list
             puts "Already exists, skipping".green
           else
             song.download
@@ -129,10 +130,6 @@ class App
       @raw_grooveshark_song = @context[:grooveshark].song(query)
     end
 
-    def downloaded
-      File.exists?(filename)
-    end
-
     def download
       download_url(@context[:grooveshark].song_url(@raw_grooveshark_song))
     end
@@ -141,12 +138,12 @@ class App
       "#{@raw_grooveshark_song.artist} - #{@raw_grooveshark_song.name}"
     end
 
-    private
-
     def filename
       name = "#{@raw_grooveshark_song.artist} - #{@raw_grooveshark_song.name}.mp3"
       name.tr('/', '-') # / is not allowed in file names
     end
+
+    private
 
     def download_url(url)
       content = open(url).read
