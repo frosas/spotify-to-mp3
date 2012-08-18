@@ -2,6 +2,6 @@
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
-require 'spotify-to-mp3'
+require 'spotify_to_mp3'
 
 SpotifyToMp3::App.new.run
