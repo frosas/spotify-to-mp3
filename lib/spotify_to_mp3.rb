@@ -39,8 +39,12 @@ module SpotifyToMp3
               FileUtils.touch song.filename # To know about songs no longer in download list
               puts "Already exists, skipping".green
             else
-              song.download
-              puts "Done".green
+              begin
+                song.download
+                puts "Done".green
+              rescue Exception => exception
+                puts exception.message.red
+              end
             end
           rescue
             puts "#{$!}".red
