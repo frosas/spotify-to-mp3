@@ -57,7 +57,6 @@ Make sure you have rubygems installed and configured:
 ## TODO
 
 - Consider multiple artists songs
-- Distinguish internal errors from user errors
 - Filter Grooveshark results by artist, title and length
-- Split code in multiple files
 - It seems Grooveshark API fails after hundreds of calls
+- Accept tracks from stdin (instead of from a file)
