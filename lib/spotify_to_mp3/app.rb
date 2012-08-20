@@ -23,6 +23,7 @@ module SpotifyToMp3
           end
         rescue Exception => exception # For some reason without the "Exception" it is ignored
           puts exception.message.red
+          exception.backtrace.each{ |step| puts step.red }
           # Continue with the next track
         end
       }
