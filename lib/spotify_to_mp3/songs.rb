@@ -1,24 +1,3 @@
-class UnresolvedSong
-  def initialize(id)
-    @id = id
-  end
-
-  def resolve
-    resolver = SpotifyToMp3::Spotify::UriResolver.new
-    if resolver.resolvable?(@id)
-      track = SpotifyToMp3::Spotify::UriResolver.new.resolve(@id)
-      source = SpotifySource.new(track)
-    else
-      source = PlainSource.new(@id)
-    end
-    ResolvedSong.new(source)
-  end
-
-  def to_s
-    @id
-  end
-end
-
 class ResolvedSong
   def initialize(source)
     @source = source

@@ -8,9 +8,8 @@ module SpotifyToMp3
         song_id.strip!
         next if song_id.empty?
         begin
-          song = UnresolvedSong.new(song_id)
-          puts "Resolving \"#{song}\" ".blue
-          song = song.resolve
+          puts "Resolving \"#{song_id}\" ".blue
+          song = SpotifyToMp3::TrackIdResolver.new.resolve(song_id)
           puts "Searching \"#{song}\" on Grooveshark ".blue
           song = song.from_grooveshark
           puts "Downloading \"#{song}\" ".blue

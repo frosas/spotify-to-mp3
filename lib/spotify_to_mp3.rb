@@ -12,3 +12,4 @@ require 'spotify_to_mp3/app'
 
 require 'spotify_to_mp3/spotify/uri_resolver'
 require 'spotify_to_mp3/spotify/track'
+require 'spotify_to_mp3/track_id_resolver'
