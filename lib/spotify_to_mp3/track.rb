@@ -2,13 +2,13 @@ module SpotifyToMp3
   class Track
     attr_reader :grooveshark_query
 
-    def initialize(id, grooveshark_query = nil)
-      @id = id
-      @grooveshark_query = grooveshark_query || @id
+    def initialize(description, grooveshark_query = nil)
+      @description = description
+      @grooveshark_query = grooveshark_query || @description
     end
 
     def to_s
-      @id
+      @description
     end
   end
 end
