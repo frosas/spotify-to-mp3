@@ -6,12 +6,8 @@ module SpotifyToMp3
     end
 
     def run
-      file = ARGV.first
-      raise "No songs file specified. Usage: #{$0} file" if file.nil?
-
-      File.open(file).each_line do |track_id|
-        track_id.strip!
-        next if track_id.empty?
+      file = ARGV.first or raise "No songs file specified. Usage: #{$0} file"
+      file_track_ids(file) do |track_id|
         begin
           puts "Resolving \"#{track_id}\" ".blue
           track = @track_id_resolver.resolve(track_id)
@@ -29,12 +25,21 @@ module SpotifyToMp3
           end
         rescue Exception => exception # For some reason without the "Exception" it is ignored
           puts exception.message.red
-          # exception.backtrace.each{ |step| puts step.red }
           # Continue with the next track
         end
       end
     rescue
       puts "#{$!}".red
+    end
+
+    def file_track_ids(file)
+      File.open(file) do |file|
+        file.each_line do |track_id|
+          track_id.strip!
+          next if track_id.empty?
+          yield track_id
+        end
+      end
     end
   end
 end
