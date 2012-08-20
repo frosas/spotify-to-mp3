@@ -5,8 +5,4 @@ class SpotifyToMp3::Spotify::Track
     @name = json['track']['name']
     @artist = json['track']['artists'].first['name']
   end
-
-  def to_s
-    "#{name} - #{artist}"
-  end
 end

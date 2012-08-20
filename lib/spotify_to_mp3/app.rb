@@ -4,30 +4,38 @@ module SpotifyToMp3
       file = ARGV.first
       raise "No songs file specified. Usage: #{$0} file" if file.nil?
 
-      File.open(file).each_line{|song_id|
-        song_id.strip!
-        next if song_id.empty?
+      File.open(file).each_line do |track_id|
+        track_id.strip!
+        next if track_id.empty?
         begin
-          puts "Resolving \"#{song_id}\" ".blue
-          song = SpotifyToMp3::TrackIdResolver.new.resolve(song_id)
-          puts "Searching \"#{song}\" on Grooveshark ".blue
-          song = song.from_grooveshark
-          puts "Downloading \"#{song}\" ".blue
-          if File.exists? song.filename
-            FileUtils.touch song.filename # To know about songs no longer in download list
+          puts "Resolving \"#{track_id}\" ".blue
+          track = TrackIdResolver.new.resolve(track_id)
+
+          puts "Searching \"#{track}\" on Grooveshark ".blue
+          grooveshark_track = grooveshark.get_track(track.grooveshark_query)
+
+          puts "Downloading \"#{grooveshark_track}\" ".blue
+          if File.exists? grooveshark_track.filename
+            FileUtils.touch grooveshark_track.filename # To know about songs no longer in download list
             puts "Already exists, skipping".green
           else
-            song.download
+            grooveshark.download(grooveshark_track)
             puts "Done".green
           end
         rescue Exception => exception # For some reason without the "Exception" it is ignored
           puts exception.message.red
-          exception.backtrace.each{ |step| puts step.red }
+          # exception.backtrace.each{ |step| puts step.red }
           # Continue with the next track
         end
-      }
+      end
     rescue
       puts "#{$!}".red
+    end
+
+    private
+
+    def grooveshark
+      @grooveshark ||= Grooveshark.new
     end
   end
 end

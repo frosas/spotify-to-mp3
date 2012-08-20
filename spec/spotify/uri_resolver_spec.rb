@@ -18,7 +18,7 @@ describe SpotifyToMp3::Spotify::UriResolver do
       track.artist.should == "Cake"
     end
 
-    it "throws error on non existant URI" do
+    it "fails on nonexistent URI" do
       expect { @resolver.resolve('spotify:track:not-found') }.to raise_error
     end
   end

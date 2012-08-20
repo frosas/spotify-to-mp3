@@ -60,3 +60,4 @@ Make sure you have rubygems installed and configured:
 - Filter Grooveshark results by artist, title and length
 - It seems Grooveshark API fails after hundreds of calls
 - Accept tracks from stdin (instead of from a file)
+- Dependency Injection (no "new"s inside classes)
