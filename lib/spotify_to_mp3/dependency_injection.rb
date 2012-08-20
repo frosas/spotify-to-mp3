@@ -7,5 +7,9 @@ module SpotifyToMp3
     def grooveshark
       @grooveshark ||= Grooveshark.new(::Grooveshark::Client.new)
     end
+
+    def app
+      @app ||= App.new(track_id_resolver, grooveshark)
+    end
   end
 end

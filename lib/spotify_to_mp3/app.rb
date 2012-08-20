@@ -1,7 +1,8 @@
 module SpotifyToMp3
   class App
-    def initialize
-      @di = DependencyInjection.new
+    def initialize(track_id_resolver, grooveshark)
+      @track_id_resolver = track_id_resolver
+      @grooveshark = grooveshark
     end
 
     def run
@@ -13,17 +14,17 @@ module SpotifyToMp3
         next if track_id.empty?
         begin
           puts "Resolving \"#{track_id}\" ".blue
-          track = @di.track_id_resolver.resolve(track_id)
+          track = @track_id_resolver.resolve(track_id)
 
           puts "Searching \"#{track}\" on Grooveshark ".blue
-          grooveshark_track = @di.grooveshark.get_track(track.grooveshark_query)
+          grooveshark_track = @grooveshark.get_track(track.grooveshark_query)
 
           puts "Downloading \"#{grooveshark_track}\" ".blue
           if File.exists? grooveshark_track.filename
             FileUtils.touch grooveshark_track.filename # To know about songs no longer in download list
             puts "Already exists, skipping".green
           else
-            @di.grooveshark.download(grooveshark_track)
+            @grooveshark.download(grooveshark_track)
             puts "Done".green
           end
         rescue Exception => exception # For some reason without the "Exception" it is ignored

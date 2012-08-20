@@ -4,4 +4,4 @@
 
 require 'spotify_to_mp3'
 
-SpotifyToMp3::App.new.run
+SpotifyToMp3::DependencyInjection.new.app.run
