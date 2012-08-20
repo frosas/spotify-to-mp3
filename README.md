@@ -42,6 +42,10 @@ Make sure you have rubygems installed and configured:
 
 ## Changelog
 
+2012-08-20
+
+- Set filename artist and title from Grooveshark
+
 2012-01-11
 
 - Touch already downloaded songs. This way songs no more in the download list can be spotted easily.
