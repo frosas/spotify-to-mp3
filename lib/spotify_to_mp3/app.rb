@@ -3,7 +3,6 @@ module SpotifyToMp3
     def initialize
       @context = {
         :grooveshark => Grooveshark.new,
-        :spotify => Spotify.new
       }
     end
 
