@@ -61,3 +61,4 @@ Make sure you have rubygems installed and configured:
 - It seems Grooveshark API fails after hundreds of calls
 - Accept tracks from stdin (instead of from a file)
 - Dependency Injection (no "new"s inside classes)
+- Test downloads

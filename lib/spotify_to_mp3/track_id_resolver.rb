@@ -7,9 +7,9 @@ module SpotifyToMp3
     private
 
     def resolve_spotify_track(id)
-      resolver = Spotify::UriResolver.new
-      if resolver.resolvable?(id)
-        spotify_track = resolver.resolve(id)
+      spotify = Spotify.new
+      if spotify.resolvable_uri?(id)
+        spotify_track = spotify.get_track(id)
         description = "#{spotify_track.artist} - #{spotify_track.name}"
         grooveshark_query = "artist:\"#{spotify_track.artist}\" title:\"#{spotify_track.name}\""
         Track.new(description, grooveshark_query)
