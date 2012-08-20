@@ -11,7 +11,7 @@ module SpotifyToMp3
       context "#file_track_ids" do
         it "reads lines" do
           open_test_file("1\n2\n3") do |file|
-            file_track_ids_count(file).should == 3
+            @app.file_track_ids(file).count.should == 3
           end
         end
 
@@ -25,7 +25,7 @@ module SpotifyToMp3
 
         it "ignores empty lines" do
           open_test_file("1\n\n2\n") do |file|
-            file_track_ids_count(file).should == 2
+            @app.file_track_ids(file).count.should == 2
           end
         end
       end
@@ -36,12 +36,6 @@ module SpotifyToMp3
           file.rewind
           yield file
         end
-      end
-
-      def file_track_ids_count(file)
-        count = 0
-        @app.file_track_ids(file) do |track_id| count += 1 end
-        count
       end
     end
   end

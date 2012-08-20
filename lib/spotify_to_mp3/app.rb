@@ -7,7 +7,7 @@ module SpotifyToMp3
 
     def run
       file = ARGV.first or raise "No songs file specified. Usage: #{$0} file"
-      file_track_ids(file) do |track_id|
+      file_track_ids(file).each do |track_id|
         begin
           puts "Resolving \"#{track_id}\" ".blue
           track = @track_id_resolver.resolve(track_id)
@@ -33,13 +33,23 @@ module SpotifyToMp3
     end
 
     def file_track_ids(file)
-      File.open(file) do |file|
-        file.each_line do |track_id|
-          track_id.strip!
-          next if track_id.empty?
-          yield track_id
+      Class.new do
+        include Enumerable
+
+        def initialize(file)
+          @file = file
         end
-      end
+
+        def each
+          File.open(@file) do |file|
+            file.each_line do |track_id|
+              track_id.strip!
+              next if track_id.empty?
+              yield track_id
+            end
+          end
+        end
+      end.new(file)
     end
   end
 end
