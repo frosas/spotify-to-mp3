@@ -5,9 +5,9 @@ class UnresolvedSong
   end
 
   def resolve
-    resolver = SpotifyToMp3::Grooveshark::UriResolver.new
+    resolver = SpotifyToMp3::Spotify::UriResolver.new
     if resolver.resolvable?(@id)
-      track = SpotifyToMp3::Grooveshark::UriResolver.new.resolve(@id)
+      track = SpotifyToMp3::Spotify::UriResolver.new.resolve(@id)
       source = SpotifySource.new(@context, track)
     else
       source = PlainSource.new(@context, @id)

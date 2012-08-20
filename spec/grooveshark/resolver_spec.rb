@@ -1,8 +1,8 @@
 require 'spotify_to_mp3'
 
-describe SpotifyToMp3::Grooveshark::UriResolver do
+describe SpotifyToMp3::Spotify::UriResolver do
   before(:each) do
-    @resolver = SpotifyToMp3::Grooveshark::UriResolver.new
+    @resolver = SpotifyToMp3::Spotify::UriResolver.new
   end
 
   context '#resolve' do

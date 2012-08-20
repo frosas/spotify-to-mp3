@@ -1,4 +1,4 @@
-class SpotifyToMp3::Grooveshark::Track
+class SpotifyToMp3::Spotify::Track
   attr_reader :name, :artist
 
   def initialize(json)
