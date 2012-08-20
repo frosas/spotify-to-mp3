@@ -9,11 +9,11 @@ module SpotifyToMp3
         next if song_id.empty?
         begin
           song = UnresolvedSong.new(song_id)
-          print "Resolving \"#{song}\" "
+          puts "Resolving \"#{song}\" ".blue
           song = song.resolve
-          print "-> Searching \"#{song}\" on Grooveshark "
+          puts "Searching \"#{song}\" on Grooveshark ".blue
           song = song.from_grooveshark
-          print "-> Downloading \"#{song}\" "
+          puts "Downloading \"#{song}\" ".blue
           if File.exists? song.filename
             FileUtils.touch song.filename # To know about songs no longer in download list
             puts "Already exists, skipping".green
