@@ -1,17 +1,17 @@
-Gem::Specification.new do |s|
-  s.name = 'spotify-to-mp3'
-  s.summary = 'Spotify to MP3'
-  s.description = 'Download MP3 files of Spotify tracks'
-  s.version = '0.4.2'
-  s.author = 'Francesc Rosàs'
-  s.email = 'francescrosasbosque@gmail.com'
-  s.homepage = 'https://github.com/frosas/spotify-to-mp3'
+Gem::Specification.new do |gem|
+  gem.name = 'spotify-to-mp3'
+  gem.summary = 'Spotify to MP3'
+  gem.description = 'Download Spotify tracks as MP3 files from Grooveshark'
+  gem.version = '0.4.2'
+  gem.author = 'Francesc Rosàs'
+  gem.email = 'francescrosasbosque@gmail.com'
+  gem.homepage = 'https://github.com/frosas/spotify-to-mp3'
 
-  s.add_dependency 'grooveshark'
-  s.add_dependency 'colorize'
-  s.add_dependency 'rest-client'
+  gem.add_dependency 'grooveshark'
+  gem.add_dependency 'colorize'
+  gem.add_dependency 'rest-client'
 
-  s.files = `git ls-files`.split("\n")
-  s.executables = `git ls-files -- bin/*`.split("\n").map{|f| File.basename(f)}
-  s.require_paths = ['.']
+  gem.files = `git ls-files`.split("\n")
+  gem.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  gem.require_paths = ['lib']
 end

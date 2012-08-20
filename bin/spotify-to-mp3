@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+# To run it in development: ruby -Ilib bin/spotify-to-mp3
 
 require 'spotify_to_mp3'
 
