@@ -1,6 +1,5 @@
 class UnresolvedSong
-  def initialize(context, id)
-    @context = context
+  def initialize(id)
     @id = id
   end
 
@@ -8,11 +7,11 @@ class UnresolvedSong
     resolver = SpotifyToMp3::Spotify::UriResolver.new
     if resolver.resolvable?(@id)
       track = SpotifyToMp3::Spotify::UriResolver.new.resolve(@id)
-      source = SpotifySource.new(@context, track)
+      source = SpotifySource.new(track)
     else
-      source = PlainSource.new(@context, @id)
+      source = PlainSource.new(@id)
     end
-    ResolvedSong.new(@context, source)
+    ResolvedSong.new(source)
   end
 
   def to_s
@@ -21,13 +20,12 @@ class UnresolvedSong
 end
 
 class ResolvedSong
-  def initialize(context, source)
-    @context = context
+  def initialize(source)
     @source = source
   end
 
   def from_grooveshark
-    GroovesharkSong.new(@context, @source.grooveshark_query)
+    GroovesharkSong.new(@source.grooveshark_query)
   end
 
   def to_s
@@ -36,13 +34,13 @@ class ResolvedSong
 end
 
 class GroovesharkSong
-  def initialize(context, query)
-    @context = context
-    @raw_grooveshark_song = @context[:grooveshark].song(query)
+  def initialize(query)
+    @grooveshark = SpotifyToMp3::Grooveshark.new
+    @raw_grooveshark_song = @grooveshark.song(query)
   end
 
   def download
-    download_url(@context[:grooveshark].song_url(@raw_grooveshark_song))
+    download_url(@grooveshark.song_url(@raw_grooveshark_song))
   end
 
   def to_s

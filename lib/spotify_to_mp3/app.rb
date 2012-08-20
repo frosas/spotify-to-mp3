@@ -1,11 +1,5 @@
 module SpotifyToMp3
   class App
-    def initialize
-      @context = {
-        :grooveshark => Grooveshark.new,
-      }
-    end
-
     def run
       file = ARGV.first
       raise "No songs file specified. Usage: #{$0} file" if file.nil?
@@ -14,7 +8,7 @@ module SpotifyToMp3
         song_id.strip!
         next if song_id.empty?
         begin
-          song = UnresolvedSong.new(@context, song_id)
+          song = UnresolvedSong.new(song_id)
           print "Resolving \"#{song}\" "
           song = song.resolve
           print "-> Searching \"#{song}\" on Grooveshark "

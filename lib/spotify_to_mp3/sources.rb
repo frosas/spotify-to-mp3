@@ -11,8 +11,7 @@ end
 
 class SpotifySource < Source
     
-  def initialize(context, track)
-    @context = context
+  def initialize(track)
     @track = track
   end
 
@@ -29,7 +28,7 @@ class PlainSource < Source
     
   attr_reader :grooveshark_query, :to_s
 
-  def initialize(context, id)
+  def initialize(id)
     parts = id.split(' - ', 2)
     if parts.length < 2
       @grooveshark_query = id
