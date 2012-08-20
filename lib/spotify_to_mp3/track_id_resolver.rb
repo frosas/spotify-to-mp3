@@ -1,5 +1,9 @@
 module SpotifyToMp3
   class TrackIdResolver
+    def initialize(spotify)
+      @spotify = spotify
+    end
+
     def resolve(track_id)
       resolve_spotify_track(track_id) || resolve_plain_track(track_id)
     end
@@ -7,9 +11,8 @@ module SpotifyToMp3
     private
 
     def resolve_spotify_track(id)
-      spotify = Spotify.new
-      if spotify.resolvable_uri?(id)
-        spotify_track = spotify.get_track(id)
+      if @spotify.resolvable_uri?(id)
+        spotify_track = @spotify.get_track(id)
         description = "#{spotify_track.artist} - #{spotify_track.name}"
         grooveshark_query = "artist:\"#{spotify_track.artist}\" title:\"#{spotify_track.name}\""
         Track.new(description, grooveshark_query)

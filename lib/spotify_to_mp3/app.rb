@@ -1,5 +1,9 @@
 module SpotifyToMp3
   class App
+    def initialize
+      @di = DependencyInjection.new
+    end
+
     def run
       file = ARGV.first
       raise "No songs file specified. Usage: #{$0} file" if file.nil?
@@ -9,17 +13,17 @@ module SpotifyToMp3
         next if track_id.empty?
         begin
           puts "Resolving \"#{track_id}\" ".blue
-          track = TrackIdResolver.new.resolve(track_id)
+          track = @di.track_id_resolver.resolve(track_id)
 
           puts "Searching \"#{track}\" on Grooveshark ".blue
-          grooveshark_track = grooveshark.get_track(track.grooveshark_query)
+          grooveshark_track = @di.grooveshark.get_track(track.grooveshark_query)
 
           puts "Downloading \"#{grooveshark_track}\" ".blue
           if File.exists? grooveshark_track.filename
             FileUtils.touch grooveshark_track.filename # To know about songs no longer in download list
             puts "Already exists, skipping".green
           else
-            grooveshark.download(grooveshark_track)
+            @di.grooveshark.download(grooveshark_track)
             puts "Done".green
           end
         rescue Exception => exception # For some reason without the "Exception" it is ignored
@@ -30,12 +34,6 @@ module SpotifyToMp3
       end
     rescue
       puts "#{$!}".red
-    end
-
-    private
-
-    def grooveshark
-      @grooveshark ||= Grooveshark.new
     end
   end
 end

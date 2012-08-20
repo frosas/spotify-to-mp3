@@ -6,6 +6,7 @@ require 'fileutils'
 require 'cgi'
 
 require 'spotify_to_mp3/app'
+require 'spotify_to_mp3/dependency_injection'
 require 'spotify_to_mp3/spotify'
 require 'spotify_to_mp3/spotify/track'
 require 'spotify_to_mp3/track_id_resolver'

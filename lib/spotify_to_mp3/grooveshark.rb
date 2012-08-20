@@ -1,7 +1,7 @@
 module SpotifyToMp3
   class Grooveshark
-    def initialize
-      @client = ::Grooveshark::Client.new
+    def initialize(client)
+      @client = client
     end
 
     def get_track(query)
