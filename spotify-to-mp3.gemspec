@@ -7,9 +7,11 @@ Gem::Specification.new do |gem|
   gem.email = 'francescrosasbosque@gmail.com'
   gem.homepage = 'https://github.com/frosas/spotify-to-mp3'
 
-  gem.add_dependency 'grooveshark'
-  gem.add_dependency 'colorize'
-  gem.add_dependency 'rest-client'
+  gem.add_runtime_dependency 'grooveshark'
+  gem.add_runtime_dependency 'colorize'
+  gem.add_runtime_dependency 'rest-client'
+
+  gem.add_development_dependency 'rspec'
 
   gem.files = `git ls-files`.split("\n")
   gem.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
