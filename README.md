@@ -58,6 +58,14 @@ Make sure you have rubygems installed and configured:
 
 - Both Spotify URLs and plain song names are accepted
 
+## Testing
+
+[![Build Status](https://secure.travis-ci.org/frosas/spotify-to-mp3.png)](http://travis-ci.org/frosas/spotify-to-mp3)
+
+```bash
+$ rspec
+```
+
 ## TODO
 
 - Consider multiple artists songs
