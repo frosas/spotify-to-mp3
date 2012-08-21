@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# To run it in development: ruby -Ilib bin/spotify-to-mp3
+# To run it in development: bundle exec bin/spotify-to-mp3
 
 require 'spotify_to_mp3'
 
