@@ -70,6 +70,8 @@ gem install spotify-to-mp3
 
 ## Testing
 
+[![Build Status](https://secure.travis-ci.org/frosas/spotify-to-mp3.png)](http://travis-ci.org/frosas/spotify-to-mp3)
+
 ```bash
 $ rspec
 ```
