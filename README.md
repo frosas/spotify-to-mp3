@@ -37,14 +37,14 @@ gem install spotify-to-mp3
 
 ## Usage
 
-1. Drag Spotify songs to a file (eg, songs.txt). Plain song names are also 
-   accepted. It may look like this:
+1. Create a file (like `songs.txt`) and copy the Spotify songs URLs to it. Plain song names are also 
+   accepted. It will look like this:
 
         http://open.spotify.com/track/1JqTcOjOn7gEpeC0JcRVPa
         spotify:track:1fE3ddAlmjJ99IIfLgZjTy
         The Drums - Money
 
-2. Download songs. They are saved to the current directory. Errors will appear in red (eg, when a song is not found)
+2. Download songs. They are saved to the current directory. Errors will appear in red (like when a song is not found).
 
     ```bash
     $ spotify-to-mp3 songs.txt
