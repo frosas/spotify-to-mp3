@@ -12,13 +12,13 @@ $ sudo gem install spotify-to-mp3
 
 Probably `sudo` can be ommited if using [rvm](http://beginrescueend.com/) or similar.
 
-### Linux (Ubuntu 11.04)
+### Linux (Ubuntu 12.10 / 13.10)
 
 Make sure you have rubygems installed and configured:
 
 ```bash
-$ sudo apt-get install rubygems1.8
-$ echo 'PATH=$PATH:/var/lib/gems/1.8/bin' | sudo tee /etc/profile.d/rubygems1.8.sh >/dev/null
+$ sudo apt-get install rubygems1.9 ruby1.9.1-dev
+$ echo 'PATH=$PATH:/var/lib/gems/1.9/bin' | sudo tee /etc/profile.d/rubygems1.9.sh >/dev/null
 ```
 
 <span></span>
