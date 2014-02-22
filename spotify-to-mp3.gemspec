@@ -2,7 +2,7 @@ Gem::Specification.new do |gem|
   gem.name = 'spotify-to-mp3'
   gem.summary = 'Spotify to MP3'
   gem.description = 'Download Spotify tracks as MP3 files from Grooveshark'
-  gem.version = '0.5.2'
+  gem.version = '0.5.3'
   gem.author = 'Francesc Rosàs'
   gem.email = 'francescrosasbosque@gmail.com'
   gem.homepage = 'https://github.com/frosas/spotify-to-mp3'
