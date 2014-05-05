@@ -21,23 +21,13 @@ $ sudo apt-get install rubygems1.9 ruby1.9.1-dev
 $ echo 'PATH=$PATH:/var/lib/gems/1.9/bin' | sudo tee /etc/profile.d/rubygems1.9.sh >/dev/null
 ```
 
-<span></span>
-
 ```bash
 $ sudo gem install spotify-to-mp3
 ```
 
-### Windows (not tested)
-
-[Install Ruby](http://rubyinstaller.org/)
-
-```
-gem install spotify-to-mp3
-```
-
 ## Usage
 
-1. Create a file (like `songs.txt`) and copy the Spotify songs URLs to it. Plain song names are also 
+1. Create a file (like `songs.txt`) and copy the Spotify songs URLs to it. Plain song names are also
    accepted. It will look like this:
 
         http://open.spotify.com/track/1JqTcOjOn7gEpeC0JcRVPa
