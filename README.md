@@ -30,17 +30,37 @@ $ sudo gem install spotify-to-mp3
 1. Create a file (like `songs.txt`) and copy the Spotify songs URLs to it. Plain song names are also
    accepted. It will look like this:
 
-        http://open.spotify.com/track/1JqTcOjOn7gEpeC0JcRVPa
-        spotify:track:1fE3ddAlmjJ99IIfLgZjTy
-        The Drums - Money
+   ```
+   http://open.spotify.com/track/1JqTcOjOn7gEpeC0JcRVPa
+   spotify:track:1fE3ddAlmjJ99IIfLgZjTy
+   The Drums - Money
+   ```
 
 2. Download songs. They are saved to the current directory. Errors will appear in red (like when a song is not found).
 
-    ```bash
-    $ spotify-to-mp3 songs.txt
-    ```
+   ```bash
+   $ spotify-to-mp3 songs.txt
+   ```
+
+Also, as it's common in Unix programs, you can pipe in the songs:
+
+```bash
+$ echo white knuckle ride | spotify-to-mp3
+```
+
+or simply:
+
+```bash
+$ spotify-to-mp3
+```
+
+and drag the songs from the Spotify app to the terminal.
 
 ## Changelog
+
+2014-05-05
+
+- Accept track IDs from stdin
 
 2012-08-20
 

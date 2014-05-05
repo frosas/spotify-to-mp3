@@ -1,6 +1,6 @@
 require 'colorize'
 require 'fileutils'
-require 'spotify_to_mp3/app/file_track_ids'
+require 'spotify_to_mp3/app/stream_track_ids'
 
 module SpotifyToMp3
   class App
@@ -10,8 +10,7 @@ module SpotifyToMp3
     end
 
     def run
-      file = ARGV.first or raise "No songs file specified. Usage: #{$0} file"
-      FileTrackIds.new(file).each do |track_id|
+      StreamTrackIds.new(ARGF).each do |track_id|
         begin
           puts "Resolving \"#{track_id}\""
           track = @track_id_resolver.resolve(track_id)
