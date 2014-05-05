@@ -1,3 +1,6 @@
+require 'cgi'
+require 'open-uri'
+
 module SpotifyToMp3
   class Spotify
     def get_track(uri)

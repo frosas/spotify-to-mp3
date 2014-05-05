@@ -1,10 +1,3 @@
-require 'grooveshark'
-require 'open-uri'
-require 'colorize'
-require 'rest-client'
-require 'fileutils'
-require 'cgi'
-
 require 'spotify_to_mp3/app'
 require 'spotify_to_mp3/app/file_track_ids'
 require 'spotify_to_mp3/dependency_injection'

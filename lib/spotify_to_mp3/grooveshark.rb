@@ -1,3 +1,6 @@
+require 'fileutils'
+require 'rest-client'
+
 module SpotifyToMp3
   class Grooveshark
     def initialize(client)

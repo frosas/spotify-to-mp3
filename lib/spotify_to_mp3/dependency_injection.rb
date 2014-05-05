@@ -1,3 +1,5 @@
+require 'grooveshark'
+
 module SpotifyToMp3
   class DependencyInjection
     def track_id_resolver

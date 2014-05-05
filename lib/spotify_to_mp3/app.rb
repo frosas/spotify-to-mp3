@@ -1,3 +1,6 @@
+require 'fileutils'
+require 'colorize'
+
 module SpotifyToMp3
   class App
     def initialize(track_id_resolver, grooveshark)
@@ -18,7 +21,7 @@ module SpotifyToMp3
           print "Found \"#{grooveshark_track}\""
           if File.exists?(grooveshark_track.filename)
             # To know about songs no longer in download list
-            FileUtils.touch grooveshark_track.filename 
+            FileUtils.touch grooveshark_track.filename
 
             puts ", already exists, skipping"
           else

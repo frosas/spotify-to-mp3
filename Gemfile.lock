@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spotify-to-mp3 (0.5.2)
+    spotify-to-mp3 (0.5.4)
       colorize
       grooveshark
       json_pure
@@ -17,6 +17,7 @@ GEM
       rest-client (>= 1.5.1)
       uuid (~> 2.0)
     json (1.8.1)
+    json_pure (1.8.1)
     macaddr (1.7.1)
       systemu (~> 2.6.2)
     mime-types (2.2)
