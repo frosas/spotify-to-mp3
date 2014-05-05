@@ -2,6 +2,6 @@
 
 # To run it in development: bundle exec bin/spotify-to-mp3
 
-require 'spotify_to_mp3/dependency_injection'
+require 'spotify_to_mp3/dependency_container'
 
-SpotifyToMp3::DependencyInjection.new.app.run
+SpotifyToMp3::DependencyContainer.new.app.run

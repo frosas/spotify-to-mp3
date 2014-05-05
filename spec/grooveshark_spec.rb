@@ -1,10 +1,10 @@
-require 'spotify_to_mp3/dependency_injection'
+require 'spotify_to_mp3/dependency_container'
 
 module SpotifyToMp3
   describe Grooveshark do
     context "#get_track" do
       before(:each) do
-        @grooveshark = DependencyInjection.new.grooveshark
+        @grooveshark = DependencyContainer.new.grooveshark
       end
 
       it "finds by plain query" do

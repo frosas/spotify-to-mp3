@@ -5,8 +5,7 @@ require 'spotify_to_mp3/spotify'
 require 'spotify_to_mp3/track_id_resolver'
 
 module SpotifyToMp3
-  # TODO Rename it to DependencyContainer
-  class DependencyInjection
+  class DependencyContainer
     def track_id_resolver
       @track_id_resolver ||= TrackIdResolver.new(Spotify.new)
     end

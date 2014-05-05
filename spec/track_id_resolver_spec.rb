@@ -1,9 +1,9 @@
-require 'spotify_to_mp3/dependency_injection'
+require 'spotify_to_mp3/dependency_container'
 
 module SpotifyToMp3
   describe TrackIdResolver do
     before(:each) do
-      @resolver = DependencyInjection.new.track_id_resolver
+      @resolver = DependencyContainer.new.track_id_resolver
     end
 
     it "resolves Spotify HTTP URLs" do
