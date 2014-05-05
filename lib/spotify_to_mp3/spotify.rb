@@ -1,5 +1,6 @@
 require 'cgi'
 require 'open-uri'
+require 'spotify_to_mp3/spotify/track'
 
 module SpotifyToMp3
   class Spotify

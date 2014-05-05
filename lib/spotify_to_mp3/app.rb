@@ -1,5 +1,6 @@
-require 'fileutils'
 require 'colorize'
+require 'fileutils'
+require 'spotify_to_mp3/app/file_track_ids'
 
 module SpotifyToMp3
   class App

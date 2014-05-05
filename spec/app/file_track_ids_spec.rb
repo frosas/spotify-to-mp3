@@ -1,4 +1,4 @@
-require 'spotify_to_mp3'
+require 'spotify_to_mp3/app/file_track_ids'
 require 'tempfile'
 
 module SpotifyToMp3

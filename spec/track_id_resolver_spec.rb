@@ -1,4 +1,4 @@
-require 'spotify_to_mp3'
+require 'spotify_to_mp3/dependency_injection'
 
 module SpotifyToMp3
   describe TrackIdResolver do

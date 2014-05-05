@@ -1,3 +1,5 @@
+require 'spotify_to_mp3/track'
+
 module SpotifyToMp3
   class TrackIdResolver
     def initialize(spotify)

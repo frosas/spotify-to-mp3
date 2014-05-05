@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'rest-client'
+require 'spotify_to_mp3/grooveshark/track'
 
 module SpotifyToMp3
   class Grooveshark

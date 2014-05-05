@@ -1,4 +1,4 @@
-require 'spotify_to_mp3'
+require 'spotify_to_mp3/spotify'
 
 module SpotifyToMp3
   describe Spotify do
