@@ -18,14 +18,13 @@ module SpotifyToMp3
           puts "Searching \"#{track}\" on Grooveshark"
           grooveshark_track = @grooveshark.get_track(track.grooveshark_query)
 
-          print "Found \"#{grooveshark_track}\""
           if File.exists?(grooveshark_track.filename)
             # To know about songs no longer in download list
             FileUtils.touch grooveshark_track.filename
 
-            puts ", already exists, skipping"
+            puts "Skipping \"#{grooveshark_track}\", it already exists"
           else
-            puts ", downloading..."
+            puts "Downloading \"#{grooveshark_track}\""
             @grooveshark.download(grooveshark_track)
           end
         rescue Exception => exception # For some reason without the "Exception" it is ignored
