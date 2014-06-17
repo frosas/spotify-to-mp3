@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spotify-to-mp3 (0.5.4)
+    spotify-to-mp3 (0.6.1)
       colorize
       grooveshark
       json_pure
