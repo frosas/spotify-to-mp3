@@ -1,6 +1,8 @@
 # Spotify to MP3
 
-A simple command line utility to download MP3 files of Spotify tracks
+**A simple command line utility to download MP3 files of Spotify tracks.**
+
+*Note those files are downloaded from Grooveshark, not from Spotify itself.*
 
 ## Installation
 
