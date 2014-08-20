@@ -1,8 +1,8 @@
-require 'spotify_to_mp3/app/file_track_ids'
+require 'spotify_to_mp3/app/stream_track_ids'
 require 'tempfile'
 
 module SpotifyToMp3
-  describe App::FileTrackIds do
+  describe App::StreamTrackIds do
     it "reads lines" do
       open_test_file("1\n2\n3") do |ids|
         ids.count.should == 3
@@ -25,7 +25,7 @@ module SpotifyToMp3
       Tempfile.open('tracks') do |file|
         file.write(content)
         file.rewind
-        yield App::FileTrackIds.new(file)
+        yield App::StreamTrackIds.new(file)
       end
     end
   end
