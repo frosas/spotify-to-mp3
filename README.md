@@ -1,8 +1,17 @@
 # Spotify to MP3
 
-**A simple command line utility to download MP3 files of Spotify tracks.**
+A simple command line utility to download MP3 files of Spotify tracks. *Note those files are downloaded from Grooveshark, not from Spotify itself.*
 
-*Note those files are downloaded from Grooveshark, not from Spotify itself.*
+---
+
+**THIS PROJECT IS IN MAINTENANCE MODE**
+
+Time is finite and these days I'm focusing on other projects. Hope you understand.
+
+- I'll keep working on the occasional bug fixing and making sure it still works on the supported platforms.
+- Most probably I won't add any new feature. [Feature requests](https://github.com/frosas/spotify-to-mp3/labels/Feature) will be kept open in case somebody wants to contribute with a pull request.
+
+---
 
 ## Installation
 
