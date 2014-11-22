@@ -3,6 +3,7 @@ require 'spotify_to_mp3/app'
 require 'spotify_to_mp3/grooveshark'
 require 'spotify_to_mp3/spotify'
 require 'spotify_to_mp3/track_id_resolver'
+require 'spotify_to_mp3/logger'
 
 module SpotifyToMp3
   class DependencyContainer
@@ -14,8 +15,13 @@ module SpotifyToMp3
       @grooveshark ||= Grooveshark.new(::Grooveshark::Client.new)
     end
 
-    def app
-      @app ||= App.new(track_id_resolver, grooveshark)
+    def logger
+      @logger ||= Logger.new($stdout)
     end
+
+    def app
+      @app ||= App.new(track_id_resolver, grooveshark, logger)
+    end
+
   end
 end
