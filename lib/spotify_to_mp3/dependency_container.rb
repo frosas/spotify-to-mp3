@@ -2,13 +2,13 @@ require 'grooveshark'
 require 'spotify_to_mp3/app'
 require 'spotify_to_mp3/grooveshark'
 require 'spotify_to_mp3/spotify'
-require 'spotify_to_mp3/track_id_resolver'
+require 'spotify_to_mp3/query_resolver'
 require 'spotify_to_mp3/logger'
 
 module SpotifyToMp3
   class DependencyContainer
-    def track_id_resolver
-      @track_id_resolver ||= TrackIdResolver.new(Spotify.new)
+    def query_resolver
+      @query_resolver ||= QueryResolver.new(Spotify.new)
     end
 
     def grooveshark
@@ -20,7 +20,7 @@ module SpotifyToMp3
     end
 
     def app
-      @app ||= App.new(track_id_resolver, grooveshark, logger)
+      @app ||= App.new(query_resolver, grooveshark, logger)
     end
 
   end
