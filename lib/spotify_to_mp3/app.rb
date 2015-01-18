@@ -10,6 +10,8 @@ module SpotifyToMp3
     end
 
     def run
+      tracks_to_download = []
+
       StreamQueries.new(ARGF).each do |query|
         @logger.info "Resolving \"#{query}\""
         tracks = @query_resolver.resolve(query)
@@ -25,15 +27,25 @@ module SpotifyToMp3
 
               @logger.info "Skipping \"#{grooveshark_track}\", it already exists"
             else
-              @logger.info "Downloading \"#{grooveshark_track}\""
-              @grooveshark.download(grooveshark_track)
+              @logger.info "\"#{grooveshark_track}\" will be downloaded"
+              tracks_to_download << grooveshark_track
             end
           rescue Exception => exception # For some reason without the "Exception" it is ignored
-            @logger.error exception.message
+            @logger.error "\"#{track}\" won't be downloaded - #{exception.message}"
             # Continue with the next track
           end
         end
       end
+
+      @logger.info "\nDownload process initiated"
+      tracks_to_download.each_with_index do |track, i|
+        begin
+          @grooveshark.download(track, i.next, tracks_to_download.length)
+        rescue Exception => exception
+          @logger.error exception.message
+        end
+      end
+      @logger.succ "Download complete"
     rescue
       @logger.error "#{$!}"
     end

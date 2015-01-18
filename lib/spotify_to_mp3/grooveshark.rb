@@ -13,20 +13,20 @@ module SpotifyToMp3
       Track.new(client_track)
     end
 
-    def download(track)
+    def download(track, no = 1, of_total = 1)
       url = @client.get_song_url(track.client_track)
       uri = URI(url)
 
       Net::HTTP.start(uri.host) do |http|
         http.request_post("#{uri.path}?#{uri.query}", "") do |response|
-          half_win = $stdin.winsize[1] / 2
-          title = track.to_s[0..half_win.pred].ljust half_win
-          title = title.gsub(/.{3}$/, '...') if track.to_s.length > half_win
-
+          win_half = $stdin.winsize[1] / 2
+          title = "[#{no}/#{of_total}] #{track}"
+          cut_title = title[0..win_half.pred].ljust win_half
+          cut_title = cut_title.gsub(/.{3}$/, '...') if title.length > win_half
           pbar = ProgressBar.create(
-            :title => title,
+            :title => cut_title,
             :total => response['content-length'].to_i,
-            :format => '%t %p%% [%B] %E')
+            :format => "%t %p%% [%B] %E")
 
           File.open(track.filename, 'w') do |f|
             response.read_body do |str|
