@@ -1,6 +1,6 @@
 module SpotifyToMp3
   class App
-    class StreamTrackIds
+    class StreamQueries
       include Enumerable
 
       def initialize(stream)
@@ -8,10 +8,10 @@ module SpotifyToMp3
       end
 
       def each
-        @stream.each do |track_id|
-          track_id.strip!
-          next if track_id.empty?
-          yield track_id
+        @stream.each do |query|
+          query.strip!
+          next if query.empty?
+          yield query
         end
       end
     end
