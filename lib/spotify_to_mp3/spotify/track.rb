@@ -1,11 +1,11 @@
 module SpotifyToMp3
   class Spotify
     class Track
-      attr_reader :name, :artist
+      attr_reader :artist, :name
 
-      def initialize(json)
-        @name = json['track']['name']
-        @artist = json['track']['artists'].first['name']
+      def initialize(artist, name)
+        @artist = artist
+        @name = name
       end
     end
   end

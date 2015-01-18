@@ -1,5 +1,5 @@
-require 'fileutils'
-require 'rest-client'
+require 'net/http'
+require 'ruby-progressbar'
 require 'spotify_to_mp3/grooveshark/track'
 
 module SpotifyToMp3
@@ -13,10 +13,31 @@ module SpotifyToMp3
       Track.new(client_track)
     end
 
-    def download(track)
+    def download(track, no = 1, of_total = 1)
       url = @client.get_song_url(track.client_track)
-      file = RestClient::Request.execute(:method => :post, :url => url, :raw_response => true).file
-      FileUtils.mv(file.path, track.filename)
+      uri = URI(url)
+
+      Net::HTTP.start(uri.host) do |http|
+        http.request_post("#{uri.path}?#{uri.query}", "") do |response|
+          win_half = $stdin.winsize[1] / 2
+          title = "[#{no}/#{of_total}] #{track}"
+          cut_title = title[0..win_half.pred].ljust win_half
+          cut_title = cut_title.gsub(/.{3}$/, '...') if title.length > win_half
+          pbar = ProgressBar.create(
+            :title => cut_title,
+            :total => response['content-length'].to_i,
+            :format => "%t %p%% [%B] %E")
+
+          File.open(track.filename, 'w') do |f|
+            response.read_body do |str|
+              f.write str
+              str.length.times { pbar.increment }
+            end
+          end
+
+          pbar.finish
+        end
+      end
     end
   end
 end
