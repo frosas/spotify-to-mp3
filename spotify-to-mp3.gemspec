@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'colorize'
   gem.add_runtime_dependency 'rest-client'
   gem.add_runtime_dependency 'json_pure'
+  gem.add_runtime_dependency 'ruby-progressbar'
 
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'pry'

@@ -7,6 +7,7 @@ PATH
       json_pure
       rest-client
       rspotify
+      ruby-progressbar
 
 GEM
   remote: https://rubygems.org/
@@ -65,6 +66,7 @@ GEM
     rspotify (1.11.0)
       omniauth-oauth2 (~> 1.1)
       rest-client (~> 1.7)
+    ruby-progressbar (1.7.1)
     slop (3.6.0)
     systemu (2.6.4)
     uuid (2.3.7)
