@@ -1,13 +1,12 @@
-require 'cgi'
-require 'open-uri'
+require 'rspotify'
 require 'spotify_to_mp3/spotify/track'
 
 module SpotifyToMp3
   class Spotify
     def get_track(uri)
-      content = open('http://ws.spotify.com/lookup/1/.json?uri=' + CGI.escape(uri))
-      json = JSON.parse(content.string)
-      Track.new(json)
+      track_id = uri.sub(/.*:/, '')
+      track = RSpotify::Track.find(track_id)
+      Track.new(track.artists.first.name, track.name)
     end
 
     def resolvable_uri?(uri)
