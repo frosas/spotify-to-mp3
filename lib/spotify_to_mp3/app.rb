@@ -48,7 +48,7 @@ module SpotifyToMp3
             @logger.error exception.message
           end
         end
-        @logger.succ "Download complete"
+        @logger.success "Download complete"
       else
         @logger.info "Nothing to download"
       end

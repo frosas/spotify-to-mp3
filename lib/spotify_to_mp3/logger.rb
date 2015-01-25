@@ -10,8 +10,8 @@ module SpotifyToMp3
       @io_stream.puts str
     end
 
-    def succ(str)
-      @io_stream.puts colorize_succ(str)
+    def success(str)
+      @io_stream.puts colorize_success(str)
     end
 
     def error(str)
@@ -20,7 +20,7 @@ module SpotifyToMp3
 
     private
 
-    def colorize_succ(str)
+    def colorize_success(str)
       str.green
     end
 
