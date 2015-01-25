@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'spotify_to_mp3/app/stream_queries'
+require 'ruby-progressbar'
 
 module SpotifyToMp3
   class App
@@ -43,7 +44,25 @@ module SpotifyToMp3
         @logger.info "Downloading tracks..."
         tracks_to_download.each_with_index do |track, i|
           begin
-            @grooveshark.download(track, i.next, tracks_to_download.length)
+            pbar = nil
+            @grooveshark.download(
+              track: track,
+              on_response: Proc.new { |response|
+                win_half = $stdout.winsize[1] / 2
+                title = "[#{i.next}/#{tracks_to_download.length}] #{track}"
+                cut_title = title[0..win_half.pred].ljust win_half
+                cut_title = cut_title.gsub(/.{3}$/, '...') if title.length > win_half                
+                pbar = ProgressBar.create(
+                  :title => cut_title,
+                  :total => response['content-length'].to_i,
+                  :format => "%t %p%% [%B] %E"
+                )
+              },
+              on_body_chunk: Proc.new { |chunk|
+                pbar.progress += chunk.length
+              }
+            )
+            pbar.finish
           rescue Exception => exception
             @logger.error exception.message
           end
