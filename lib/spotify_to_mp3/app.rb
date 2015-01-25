@@ -44,7 +44,7 @@ module SpotifyToMp3
         @logger.info "Downloading tracks..."
         tracks_to_download.each_with_index do |track, i|
           begin
-            pbar = nil
+            progress_bar = nil
             @grooveshark.download(
               track: track,
               on_response: Proc.new { |response|
@@ -52,17 +52,17 @@ module SpotifyToMp3
                 title = "[#{i.next}/#{tracks_to_download.length}] #{track}"
                 cut_title = title[0..win_half.pred].ljust win_half
                 cut_title = cut_title.gsub(/.{3}$/, '...') if title.length > win_half                
-                pbar = ProgressBar.create(
+                progress_bar = ProgressBar.create(
                   :title => cut_title,
                   :total => response['content-length'].to_i,
                   :format => "%t %p%% [%B] %E"
                 )
               },
               on_body_chunk: Proc.new { |chunk|
-                pbar.progress += chunk.length
+                progress_bar.progress += chunk.length
               }
             )
-            pbar.finish
+            progress_bar.finish
           rescue Exception => exception
             @logger.error exception.message
           end
