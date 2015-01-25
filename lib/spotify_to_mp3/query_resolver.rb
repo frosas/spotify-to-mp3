@@ -21,6 +21,8 @@ module SpotifyToMp3
 
       tracks
     end
+    
+    private
 
     def convert_spotify_track(track)
       description = "#{track.artist} - #{track.name}"
@@ -32,8 +34,5 @@ module SpotifyToMp3
     def resolve_plain_track(description)
       Track.new(description)
     end
-
-    private :convert_spotify_track, :resolve_plain_track
-
   end
 end
