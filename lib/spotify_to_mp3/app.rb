@@ -36,16 +36,22 @@ module SpotifyToMp3
           end
         end
       end
+      
+      @logger.info("\n")
 
-      @logger.info "\nDownload process initiated"
-      tracks_to_download.each_with_index do |track, i|
-        begin
-          @grooveshark.download(track, i.next, tracks_to_download.length)
-        rescue Exception => exception
-          @logger.error exception.message
+      if !tracks_to_download.empty?
+        @logger.info "Downloading tracks..."
+        tracks_to_download.each_with_index do |track, i|
+          begin
+            @grooveshark.download(track, i.next, tracks_to_download.length)
+          rescue Exception => exception
+            @logger.error exception.message
+          end
         end
+        @logger.succ "Download complete"
+      else
+        @logger.info "Nothing to download"
       end
-      @logger.succ "Download complete"
     rescue
       @logger.error "#{$!}"
     end
