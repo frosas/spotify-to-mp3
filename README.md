@@ -69,6 +69,13 @@ and drag the songs from the Spotify app to the terminal.
 
 ## Changelog
 
+2015-01-25
+
+- Accept album URI's
+- Download progress bar
+
+A big thanks to @dulakm for such great contributions!
+
 2014-05-05
 
 - Accept track IDs from stdin
