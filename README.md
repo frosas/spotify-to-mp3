@@ -89,7 +89,18 @@ and drag the songs from the Spotify app to the terminal.
 
 - Both Spotify URLs and plain song names are accepted
 
-## Testing
+## Development
+
+Install Ruby.
+
+```bash
+$ gem install bundler
+$ bundle install
+```
+
+Do some coding.
+
+Run the tests:
 
 ```bash
 $ rspec
