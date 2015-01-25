@@ -19,7 +19,7 @@ module SpotifyToMp3
 
       Net::HTTP.start(uri.host) do |http|
         http.request_post("#{uri.path}?#{uri.query}", "") do |response|
-          win_half = $stdin.winsize[1] / 2
+          win_half = $stdout.winsize[1] / 2
           title = "[#{no}/#{of_total}] #{track}"
           cut_title = title[0..win_half.pred].ljust win_half
           cut_title = cut_title.gsub(/.{3}$/, '...') if title.length > win_half
