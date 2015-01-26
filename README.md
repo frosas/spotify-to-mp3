@@ -102,15 +102,9 @@ Install Ruby.
 
 ```bash
 $ gem install bundler
-$ bundle install
-```
-
-Do some coding.
-
-Run the tests:
-
-```bash
-$ rspec
+$ bundle
+$ bundle exec spotify-to-mp3
+$ bundle exec rspec
 ```
 
 ## TODO
