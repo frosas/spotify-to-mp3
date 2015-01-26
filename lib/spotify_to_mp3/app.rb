@@ -40,36 +40,43 @@ module SpotifyToMp3
       
       @logger.info("\n")
 
-      if !tracks_to_download.empty?
-        @logger.info "Downloading tracks..."
-        tracks_to_download.each_with_index do |track, i|
-          begin
-            progress_bar = nil
-            @grooveshark.download(
-              track: track,
-              on_response: Proc.new { |response|
-                progress_bar = DownloadProgressBar.new(
-                  track: track,
-                  track_number: i.next,
-                  track_size: response['content-length'].to_i,
-                  total_tracks: tracks_to_download.length
-                )                
-              },
-              on_body_chunk: Proc.new { |chunk|
-                progress_bar.progress += chunk.length
-              }
-            )
-            progress_bar.finish
-          rescue Exception => exception
-            @logger.error exception.message
-          end
-        end
-        @logger.success "Download complete"
-      else
-        @logger.info "Nothing to download"
-      end
+      download tracks_to_download
     rescue
       @logger.error "#{$!}"
     end
+    
+    private
+    
+    def download(tracks)
+      if tracks.empty?
+        @logger.info "Nothing to download"
+        return
+      end
+      
+      @logger.info "Downloading tracks..."
+      tracks.each_with_index do |track, i|
+        begin
+          progress_bar = nil
+          @grooveshark.download(
+            track: track,
+            on_response: Proc.new { |response|
+              progress_bar = DownloadProgressBar.new(
+                track: track,
+                track_number: i.next,
+                track_size: response['content-length'].to_i,
+                total_tracks: tracks.length
+              )                
+            },
+            on_body_chunk: Proc.new { |chunk|
+              progress_bar.progress += chunk.length
+            }
+          )
+          progress_bar.finish
+        rescue Exception => exception
+          @logger.error exception.message
+        end
+      end
+      @logger.success "Download complete"
+    end      
   end
 end
