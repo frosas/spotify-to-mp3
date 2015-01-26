@@ -74,7 +74,7 @@ and drag the songs from the Spotify app to the terminal.
 - Accept album URI's
 - Download progress bar
 
-A big thanks to @dulakm for such great contributions!
+A big thanks to [@dulakm](https://github.com/dulakm) for such great contributions!
 
 2014-05-05
 
