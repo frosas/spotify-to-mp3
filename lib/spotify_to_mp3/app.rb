@@ -59,6 +59,7 @@ module SpotifyToMp3
           progress_bar = nil
           @grooveshark.download(
             track: track,
+            number: i,
             on_response: Proc.new { |response|
               progress_bar = DownloadProgressBar.new(
                 track: track,
