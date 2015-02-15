@@ -107,6 +107,15 @@ $ bundle exec spotify-to-mp3
 $ bundle exec rspec
 ```
 
+## Update RubyGems
+
+Bump version in spotify-to-mp3.gemspec
+
+```bash
+$ bundle build spotify-to-mp3.gemspec
+$ bundle push spotify-to-mp3-[version].gem
+```
+
 ## TODO
 
 - Consider multiple artists songs
