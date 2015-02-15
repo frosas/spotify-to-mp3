@@ -112,8 +112,8 @@ $ bundle exec rspec
 Bump version in spotify-to-mp3.gemspec
 
 ```bash
-$ bundle build spotify-to-mp3.gemspec
-$ bundle push spotify-to-mp3-[version].gem
+$ gem build spotify-to-mp3.gemspec
+$ gem push spotify-to-mp3-[version].gem
 ```
 
 ## TODO
