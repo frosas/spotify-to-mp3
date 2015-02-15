@@ -6,6 +6,7 @@ Gem::Specification.new do |gem|
   gem.author = 'Francesc Rosàs'
   gem.email = 'francescrosasbosque@gmail.com'
   gem.homepage = 'https://github.com/frosas/spotify-to-mp3'
+  gem.license = 'MIT'
 
   gem.add_runtime_dependency 'rspotify', '~> 1.11.0'
   gem.add_runtime_dependency 'grooveshark', '~> 0.2.12'
