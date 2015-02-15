@@ -8,7 +8,7 @@ module SpotifyToMp3
       end
 
       def to_s
-        "#{@client_track.artist} - #{@client_track.name}"
+        "#{@client_track.artist.strip} - #{@client_track.name.strip}"
       end
 
       def filename
