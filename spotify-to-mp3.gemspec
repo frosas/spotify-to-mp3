@@ -8,12 +8,12 @@ Gem::Specification.new do |gem|
   gem.homepage = 'https://github.com/frosas/spotify-to-mp3'
   gem.license = 'MIT'
 
-  gem.add_runtime_dependency 'rspotify', '~> 1.11.0'
+  gem.add_runtime_dependency 'rspotify', '~> 1.11', '>= 1.11.0'
   gem.add_runtime_dependency 'grooveshark', '~> 0.2.12'
   gem.add_runtime_dependency 'colorize', '~> 0.7.5'
-  gem.add_runtime_dependency 'ruby-progressbar', '~> 1.7.1'
+  gem.add_runtime_dependency 'ruby-progressbar', '~> 1.7', '>= 1.7.1'
 
-  gem.add_development_dependency 'rspec', '~> 2.14.1'
+  gem.add_development_dependency 'rspec', '~> 2.14', '>= 2.14.1'
   
   gem.files = `git ls-files`.split("\n")
   gem.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
