@@ -28,12 +28,12 @@ Probably `sudo` can be ommited if using [rvm](http://beginrescueend.com/) or sim
 Make sure you have rubygems installed and configured:
 
 ```bash
-$ sudo apt-get install rubygems1.9 ruby1.9.1-dev
+$ sudo apt-get install ruby2.0 ruby2.0-dev
 $ echo 'PATH=$PATH:/var/lib/gems/1.9/bin' | sudo tee /etc/profile.d/rubygems1.9.sh >/dev/null
 ```
 
 ```bash
-$ sudo gem install spotify-to-mp3
+$ sudo gem2.0 install spotify-to-mp3
 ```
 
 ## Usage
