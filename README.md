@@ -2,7 +2,7 @@
 
 A simple command line utility to download MP3 files of Spotify tracks. *Note those files are downloaded from Grooveshark, not from Spotify itself.*
 
-**[Grooveshark](http://grooveshark.com/), the service this app was relying on, has shut down. Don't expect it work anymore :(**
+**[Grooveshark](http://grooveshark.com/), the service this app was relying on, has shut down. Don't expect it to work anymore :(**
 
 ---
 
