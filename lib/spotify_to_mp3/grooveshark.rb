@@ -14,6 +14,10 @@ module SpotifyToMp3
 
     def download(options)
       track = options.fetch(:track)
+      track_num_ = options.fetch(:number)
+      track_num_ += 1
+      track_name = track.filename
+      track_number = "%.2i" %track_num_
       on_response = options.fetch(:on_response)
       on_body_chunk = options.fetch(:on_body_chunk)
       
@@ -21,7 +25,7 @@ module SpotifyToMp3
       Net::HTTP.start(url.host) do |http|
         http.request_post("#{url.path}?#{url.query}", "") do |response|
           on_response.call(response)
-          File.open(track.filename, 'w') do |f|
+          File.open("#{track_number} - #{track_name}", 'w') do |f|
             response.read_body do |chunk|
               on_body_chunk.call(chunk)
               f.write(chunk)
